@@ -1,4 +1,4 @@
-import './css/style.css';
+import './scss/index.scss';
 
 import logger from './js/logger';
 

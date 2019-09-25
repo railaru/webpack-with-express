@@ -42,10 +42,10 @@ module.exports = {
             //options: { minimize: true }
           }
         ]
-      },
-      { 
-        test: /\.css$/,
-        use: [ 'style-loader', 'css-loader' ]
+      },      
+      {
+        test: /\.scss$/,
+        use: ['style-loader', 'css-loader', 'sass-loader']
       },
       {
        test: /\.(png|svg|jpg|jpeg|gif)$/,
@@ -58,7 +58,7 @@ module.exports = {
       template: "./src/html/index.html",
       filename: "./index.html",
       excludeChunks: [ 'server' ]
-    }),
+    }),    
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin()
   ]
