@@ -1,8 +1,9 @@
 const path = require('path')
 const HtmlWebPackPlugin = require('html-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const miniCssExtractPlugin = require('mini-css-extract-plugin');
+
 
 module.exports = {
   entry: {
@@ -44,20 +45,20 @@ module.exports = {
         use: [
           {
             loader: 'html-loader',
-            options: { minimize: true }
+            options: { minimize: false }
           }
         ]
       },
       {
         // Loads images into CSS and Javascript files
         test: /\.(png|svg|jpg|jpeg|gif)$/,
-        use: [{loader: 'url-loader'}]
+        use: [{loader: 'file-loader'}]
       },
       {
         // Loads CSS into a file when you import it via Javascript
         // Rules are set in MiniCssExtractPlugin
-        test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader']
+        test: /\.scss$/,
+        use: [miniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
       },
     ]
   },
@@ -66,7 +67,7 @@ module.exports = {
       template: './src/html/index.html',
       filename: './index.html'
     }),
-    new MiniCssExtractPlugin({
+    new miniCssExtractPlugin({
       filename: '[name].css',
       chunkFilename: '[id].css'
     })
